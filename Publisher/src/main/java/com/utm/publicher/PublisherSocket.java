@@ -1,8 +1,8 @@
 package com.utm.publicher;
 
 import com.utm.common.ConnectionSetting;
-import com.utm.common.Payload;
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class PublisherSocket
@@ -22,9 +22,9 @@ public class PublisherSocket
         }
     }
 
-    public void send(Payload payload)
+    public void send(String payload)
     {
-        connect(ConnectionSetting.IP, ConnectionSetting.port);
+        connect(ConnectionSetting.IP, ConnectionSetting.PORT);
         try
         {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());

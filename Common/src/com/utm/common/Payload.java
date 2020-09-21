@@ -15,6 +15,9 @@ public class Payload implements Serializable
         this.message = message;
     }
 
+    public Payload() {
+    }
+
     public void setId(int id)
     {
         this.id = id;

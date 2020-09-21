@@ -26,7 +26,7 @@ public class ReceiveSocket
 
     public void send(Payload payload)
     {
-        connect(ConnectionSetting.IP, ConnectionSetting.port);
+        connect(ConnectionSetting.IP, ConnectionSetting.PORT);
         try
         {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());

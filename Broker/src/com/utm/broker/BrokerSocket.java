@@ -13,7 +13,7 @@ public class BrokerSocket
     {
         try
         {
-            serverSocket = new ServerSocket(ConnectionSetting.port);
+            serverSocket = new ServerSocket(ConnectionSetting.PORT);
         }
         catch (IOException e)
         {
