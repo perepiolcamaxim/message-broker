@@ -4,11 +4,11 @@ import java.net.Socket;
 public class ConnectionInfo
 {
     public Socket socket;
-    public String topic;
+    public Payload payload;
 
-    public ConnectionInfo(Socket socket, String topic)
+    public ConnectionInfo(Socket socket, Payload payload)
     {
         this.socket = socket;
-        this.topic = topic;
+        this.payload = payload;
     }
 }

@@ -1,29 +1,38 @@
 package com.utm.broker;
-
 import com.utm.common.ConnectionInfo;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ConnectionStorage         // se stocheza conexiunile
 {
-    static List<ConnectionInfo> connections = new ArrayList<ConnectionInfo>();
+    static List<ConnectionInfo> connections = Collections.synchronizedList(new ArrayList<ConnectionInfo>());
 
     static void add(ConnectionInfo connectionInfo)
     {
-        connections.add(connectionInfo);
+        synchronized (connections)
+        {
+            connections.add(connectionInfo);
+        }
     }
 
     static void remove(ConnectionInfo connectionInfo)
     {
-        connections.remove(connectionInfo);
+        synchronized (connections)
+        {
+            connections.remove(connectionInfo);
+        }
     }
 
     static void print()
     {
-        for (ConnectionInfo connectionInfo: connections)
+        synchronized (connections)
         {
-            System.out.println(connectionInfo.socket.getInetAddress() + " " + connectionInfo.socket.getPort() + " "
-                    + connectionInfo.topic);
+            for (ConnectionInfo connectionInfo : connections)
+            {
+                System.out.println(connectionInfo.socket.getInetAddress() + " " + connectionInfo.socket.getPort() + " "
+                        + connectionInfo.payload.getTopic());
+            }
         }
     }
 }

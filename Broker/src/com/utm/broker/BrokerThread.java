@@ -25,7 +25,6 @@ public class BrokerThread implements Runnable
             System.out.println("Probleme cu sreamurile socketului");
             e.printStackTrace();
         }
-
         handler = new PayloadHandler();
     }
 
