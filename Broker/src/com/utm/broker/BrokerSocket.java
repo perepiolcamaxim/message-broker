@@ -28,6 +28,7 @@ public class BrokerSocket
 
                 BrokerThread brokerThread = new BrokerThread(clientSocket);  // se creaza thread nou
                 Thread thread = new Thread(brokerThread);
+
                 thread.start();
             }
             catch (IOException e)
@@ -36,5 +37,4 @@ public class BrokerSocket
             }
         }
     }
-
 }

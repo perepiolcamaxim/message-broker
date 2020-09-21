@@ -1,5 +1,6 @@
 package com.utm.publicher;
 
+import com.utm.common.ConnectionSetting;
 import com.utm.common.Payload;
 import java.io.*;
 import java.net.Socket;
@@ -23,6 +24,7 @@ public class PublisherSocket
 
     public void send(Payload payload)
     {
+        connect(ConnectionSetting.IP, ConnectionSetting.port);
         try
         {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());

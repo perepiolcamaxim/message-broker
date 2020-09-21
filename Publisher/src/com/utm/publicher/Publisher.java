@@ -12,7 +12,6 @@ public class Publisher
         Payload payload = new Payload(1, "sport", "messi paraseste barcelona");
 
         PublisherSocket publisherSocket = new PublisherSocket();
-        publisherSocket.connect(ConnectionSetting.IP, ConnectionSetting.port);
 
         publisherSocket.send(payload);
     }

@@ -9,22 +9,11 @@ public class BrokerThread implements Runnable
     private Socket clientSocket;
     private PayloadHandler handler;
 
-    private BufferedReader bufferedReader;
     private ObjectInputStream objectInputStream;
 
     public BrokerThread(Socket clientSocket)
     {
         this.clientSocket = clientSocket;
-        try
-        {
-            bufferedReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
-        }
-        catch (IOException e)
-        {
-            System.out.println("Probleme cu sreamurile socketului");
-            e.printStackTrace();
-        }
         handler = new PayloadHandler();
     }
 
@@ -33,22 +22,14 @@ public class BrokerThread implements Runnable
     {
         try
         {
+            objectInputStream = new ObjectInputStream(clientSocket.getInputStream());
+
             Payload payload = (Payload) objectInputStream.readObject();
-            System.out.println(payload.getId() + " " + payload.getTopic() + " " + payload.getMessage());
             handler.handle(clientSocket, payload);
         }
-        catch (IOException | ClassNotFoundException e)
+        catch (Exception e)
         {
-            try
-            {
-                clientSocket.close();
-                System.out.println("Client socket is closed");
-            }
-            catch (IOException ioException)
-            {
-                System.out.println("Can't close the client socket");
-                ioException.printStackTrace();
-            }
+            System.out.println("Ceva eroare, da pox...");
             e.printStackTrace();
         }
     }
