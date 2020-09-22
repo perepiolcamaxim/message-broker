@@ -8,7 +8,7 @@ public class PayloadHandler          // se lamureste ce sa faca cu inputul
 {
     private Socket clientSocket;
 
-    public void handle(Socket clientSocket, Payload payload)
+    public int handle(Socket clientSocket, Payload payload)
     {
         this.clientSocket = clientSocket;
 
@@ -19,10 +19,12 @@ public class PayloadHandler          // se lamureste ce sa faca cu inputul
             ConnectionStorage.add(connectionInfo);
             System.out.println("Lista de receiveri:");
             ConnectionStorage.print();
+            return 0;
         }
         else      // e publisher, vezi ce topic contine si pune mesajul in storage
         {
             System.out.println("Publisher:  " + payload.getId() + " " + payload.getTopic() + " " + payload.getMessage());
+            return 1;
         }
     }
 }

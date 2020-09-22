@@ -25,16 +25,25 @@ public class BrokerThread implements Runnable
             PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String inputLine;
-
-            writer.println("Hello client!");
-            writer.flush();
+            int outputLine;
 
             while ((inputLine = reader.readLine()) != null)
             {
                 Gson gson = new Gson();
                 Payload payload = gson.fromJson(inputLine, Payload.class);
 
-                handler.handle(clientSocket, payload);
+                outputLine = handler.handle(clientSocket, payload);
+
+                if(outputLine == 1)
+                {
+                    writer.println("Payload received!");
+                    writer.flush();
+                }
+                else
+                {
+                    writer.println("Hello receiver!");
+                    writer.flush();
+                }
             }
 
             writer.close();

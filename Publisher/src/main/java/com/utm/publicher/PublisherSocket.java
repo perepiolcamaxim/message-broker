@@ -8,6 +8,7 @@ import java.net.Socket;
 public class PublisherSocket
 {
     private Socket socket;
+    private PayloadHandler handler = new PayloadHandler();
 
     public void connect(String ip, int port)
     {
@@ -30,17 +31,14 @@ public class PublisherSocket
             BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             PrintWriter writer = new PrintWriter(socket.getOutputStream());
+            writer.println(payload);
+            writer.flush();
+
             String fromServer;
 
             while ((fromServer = reader.readLine()) != null)
             {
-                System.out.println(fromServer);
-
-                if (fromServer.equals("Server: Bye"))
-                    break;
-
-                writer.println(payload);
-                writer.flush();
+                handler.handle(fromServer);
             }
 
             writer.close();
