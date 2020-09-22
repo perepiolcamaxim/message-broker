@@ -11,8 +11,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="PAD_Lab1" target="11" />
-      <module name="Publisher" target="11" />
+      <module name="PAD_Lab1" target="1.8" />
+      <module name="Publisher" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
