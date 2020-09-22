@@ -12,10 +12,10 @@ public class Publisher
         System.out.println("com.utm.publisher.Publisher...");
 
         PublisherSocket publisherSocket = new PublisherSocket();
-        publisherSocket.connect(ConnectionSetting.IP, ConnectionSetting.PORT);
 
         Payload payload = new Payload(1, "sport", "messi paraseste echipa");
         Gson gson = new GsonBuilder().create();
+
         String payloadInJsonString = gson.toJson(payload);
 
         publisherSocket.send(payloadInJsonString);

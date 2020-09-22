@@ -1,6 +1,7 @@
 package com.utm.broker;
 
 import com.google.gson.Gson;
+import com.utm.common.ConnectionSetting;
 import com.utm.common.Payload;
 import java.io.*;
 import java.net.Socket;
@@ -9,7 +10,6 @@ public class BrokerThread implements Runnable
 {
     private Socket clientSocket;
     private PayloadHandler handler;
-
 
     public BrokerThread(Socket clientSocket)
     {
@@ -24,7 +24,7 @@ public class BrokerThread implements Runnable
         {
             PrintWriter writer = new PrintWriter(clientSocket.getOutputStream());
             BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            String inputLine, outputLine;
+            String inputLine;
 
             writer.println("Hello client!");
             writer.flush();
@@ -35,11 +35,6 @@ public class BrokerThread implements Runnable
                 Payload payload = gson.fromJson(inputLine, Payload.class);
 
                 handler.handle(clientSocket, payload);
-
-                //writer.println(outputLine);
-                //writer.flush();
-                //if (outputLine.equals("  Server: Bye!"))
-                //  break;
             }
 
             writer.close();
@@ -48,7 +43,7 @@ public class BrokerThread implements Runnable
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            System.out.println("Client disconected");
         }
-        }
+    }
 }

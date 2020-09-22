@@ -1,5 +1,7 @@
 package com.utm.receiver;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.utm.common.Payload;
 
 public class Receiver
@@ -11,6 +13,10 @@ public class Receiver
         Payload payload = new Payload(0, "sport", null);
 
         ReceiveSocket socket = new ReceiveSocket();
-        socket.send(payload);
+
+        Gson gson = new GsonBuilder().create();
+        String payloadInJsonString = gson.toJson(payload);
+
+        socket.send(payloadInJsonString);
     }
 }

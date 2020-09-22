@@ -3,8 +3,7 @@ package com.utm.receiver;
 import com.utm.common.ConnectionSetting;
 import com.utm.common.Payload;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 
 public class ReceiveSocket
@@ -24,19 +23,33 @@ public class ReceiveSocket
         }
     }
 
-    public void send(Payload payload)
+    public void send(String payload)
     {
         connect(ConnectionSetting.IP, ConnectionSetting.PORT);
         try
         {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
-            objectOutputStream.writeObject(payload);
-            objectOutputStream.flush();
-            objectOutputStream.close();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            PrintWriter writer = new PrintWriter(socket.getOutputStream());
+            String fromServer;
+
+            while ((fromServer = reader.readLine()) != null)
+            {
+                System.out.println(fromServer);
+
+                if (fromServer.equals("Server: Bye"))
+                    break;
+
+                writer.println(payload);
+                writer.flush();
+            }
+
+            writer.close();
+            reader.close();
+            socket.close();
         }
         catch (IOException e)
         {
-            System.out.println("Can't get stream from socket");
             e.printStackTrace();
         }
     }

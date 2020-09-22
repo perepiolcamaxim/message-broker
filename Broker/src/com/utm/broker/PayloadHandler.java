@@ -14,6 +14,7 @@ public class PayloadHandler          // se lamureste ce sa faca cu inputul
 
         if(payload.getId() == 0)  //  e receiver, vezi ce topic vrea si inscre-l in storage
         {
+
             ConnectionInfo connectionInfo = new ConnectionInfo(clientSocket, payload);
             ConnectionStorage.add(connectionInfo);
             System.out.println("Lista de receiveri:");
