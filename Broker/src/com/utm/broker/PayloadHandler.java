@@ -10,7 +10,6 @@ import static com.utm.broker.TopicStorage.addToStorage;
 public class PayloadHandler          // se lamureste ce sa faca cu inputul
 {
     private Socket clientSocket;
-    TopicStorage topicStorage = new TopicStorage();
 
     public int handle(Socket clientSocket, Payload payload)
     {

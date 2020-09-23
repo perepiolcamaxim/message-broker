@@ -1,6 +1,5 @@
 package com.utm.publicher;
 
-import com.utm.common.ConnectionSetting;
 
 import java.io.*;
 import java.net.Socket;
