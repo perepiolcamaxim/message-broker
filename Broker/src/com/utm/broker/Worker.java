@@ -24,6 +24,7 @@ public class Worker
                             {
                                 PrintWriter writer = new PrintWriter(connectionInfo.socket.getOutputStream());
 
+                                //TopicStorage.topicsAndMessages.get(connectionInfo.payload.getTopic()); se extrage lista cu mesaje
                                 writer.println("Message from topic!" + connectionInfo.payload.getTopic());
                                 writer.flush();
                             }
