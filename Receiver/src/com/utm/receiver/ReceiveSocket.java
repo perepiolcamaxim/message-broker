@@ -1,8 +1,6 @@
 package com.utm.receiver;
 
 import com.utm.common.ConnectionSetting;
-import com.utm.common.Payload;
-
 import java.io.*;
 import java.net.Socket;
 

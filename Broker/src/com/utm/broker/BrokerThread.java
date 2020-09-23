@@ -10,22 +10,29 @@ public class BrokerThread implements Runnable
 {
     private Socket clientSocket;
     private PayloadHandler handler;
+    private PrintWriter writer = null;
+    private BufferedReader reader = null;
 
     public BrokerThread(Socket clientSocket)
     {
         this.clientSocket = clientSocket;
+        try
+        {
+            writer = new PrintWriter(clientSocket.getOutputStream());
+            reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        }
+        catch (IOException e)
+        {
+            System.out.println("Can't open stream!");
+        }
         handler = new PayloadHandler();
     }
 
     @Override
     public void run()
     {
-        PrintWriter writer = null;
-        BufferedReader reader = null;
         try
         {
-            writer = new PrintWriter(clientSocket.getOutputStream());
-            reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String inputLine;
             int outputLine;
 

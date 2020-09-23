@@ -28,7 +28,6 @@ public class PayloadHandler          // se lamureste ce sa faca cu inputul
         else      // e publisher, vezi ce topic contine si pune mesajul in storage
         {
             addToStorage(payload);
-            //System.out.println("Publisher:  " + payload.getId() + " " + payload.getTopic() + " " + payload.getMessage());
             return 1;
         }
     }
