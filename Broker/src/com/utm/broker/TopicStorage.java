@@ -2,12 +2,14 @@ package com.utm.broker;
 
 import com.utm.common.Payload;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class TopicStorage
 {
-    public static HashMap<String, ArrayList<String>> topicsAndMessages = new HashMap<String, ArrayList<String>>();
+    public static Map<String, ArrayList<String>> topicsAndMessages =
+            Collections.synchronizedMap(new HashMap<String, ArrayList<String>>());
     public static ArrayList<String> itemsList = null;
 
     public static synchronized void addToStorage(Payload payload)
