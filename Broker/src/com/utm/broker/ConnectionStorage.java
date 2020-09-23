@@ -1,5 +1,6 @@
 package com.utm.broker;
 import com.utm.common.ConnectionInfo;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,11 +17,12 @@ public class ConnectionStorage         // se stocheza conexiunile
         }
     }
 
-    static void remove(ConnectionInfo connectionInfo)
+    static void remove(Socket socket)
     {
         synchronized (connections)
         {
-            connections.remove(connectionInfo);
+            connections.removeIf(connection -> (connection.socket.getInetAddress() == socket.getInetAddress())
+                    && (connection.socket.getPort() == socket.getPort()));
         }
     }
 

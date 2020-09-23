@@ -1,6 +1,5 @@
 package com.utm.publicher;
 
-import com.utm.common.ConnectionSetting;
 
 import java.io.*;
 import java.net.Socket;
@@ -9,12 +8,16 @@ public class PublisherSocket
 {
     private Socket socket;
     private PayloadHandler handler = new PayloadHandler();
+    private BufferedReader reader;
+    private PrintWriter writer;
 
-    public void connect(String ip, int port)
+    PublisherSocket(String ip, int port)
     {
         try
         {
             socket = new Socket(ip, port);
+            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            writer = new PrintWriter(socket.getOutputStream());
         }
         catch (IOException e)
         {
@@ -25,16 +28,10 @@ public class PublisherSocket
 
     public void send(String payload)
     {
-        connect(ConnectionSetting.IP, ConnectionSetting.PORT);
-        try
-        {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        writer.println(payload);
+        writer.flush();
 
-            PrintWriter writer = new PrintWriter(socket.getOutputStream());
-            writer.println(payload);
-            writer.flush();
-
-            String fromServer;
+            /*String fromServer;
 
             while ((fromServer = reader.readLine()) != null)
             {
@@ -44,10 +41,6 @@ public class PublisherSocket
             writer.close();
             reader.close();
             socket.close();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+             */
     }
 }
