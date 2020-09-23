@@ -13,7 +13,7 @@ public class Publisher
 
         PublisherSocket publisherSocket = new PublisherSocket();
 
-        Payload payload = new Payload(1, "sport", "messi paraseste echipa");
+        Payload payload = new Payload(1, "sport", "Hello");
         Gson gson = new GsonBuilder().create();
 
         String payloadInJsonString = gson.toJson(payload);
