@@ -14,38 +14,26 @@ public class TopicStorage
 
     public static synchronized void addToStorage(Payload payload)
     {
-        // if list does not exist create it
-        if (topicsAndMessages.isEmpty())
+        if(searchIfTopicExists(payload.getTopic()) == 1)
         {
+            topicsAndMessages.get(payload.getTopic()).add(payload.getMessage());
+        }
+        else {
             itemsList = new ArrayList<String>();
             itemsList.add(payload.getMessage());
             topicsAndMessages.put(payload.getTopic(), itemsList);
+        }
+    }
 
-            for (Map.Entry<String, ArrayList<String>> entry : topicsAndMessages.entrySet())
+    private static synchronized int searchIfTopicExists(String topic)
+    {
+        for (Map.Entry<String, ArrayList<String>> entry : topicsAndMessages.entrySet())
+        {
+            if(entry.getKey().equalsIgnoreCase(topic))
             {
-                System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+                return 1;
             }
         }
-        else
-            {
-            for (Map.Entry<String, ArrayList<String>> entry : topicsAndMessages.entrySet())
-            {
-                if (payload.getTopic().equalsIgnoreCase(entry.getKey()))
-                {
-                    itemsList = entry.getValue();
-                    itemsList.add(payload.getMessage());
-
-                    topicsAndMessages.put(payload.getTopic(), itemsList);
-                    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-                }
-                else
-                    {
-                    itemsList = new ArrayList<String>();
-                    itemsList.add(payload.getMessage());
-                    topicsAndMessages.put(payload.getTopic(), itemsList);
-                    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-                }
-            }
-        }
+        return 0;
     }
 }
