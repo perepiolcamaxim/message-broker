@@ -25,7 +25,7 @@ public class TopicStorage
         }
     }
 
-    private static int searchIfTopicExists(String topic)
+    private static synchronized int searchIfTopicExists(String topic)
     {
         for (Map.Entry<String, ArrayList<String>> entry : topicsAndMessages.entrySet())
         {
