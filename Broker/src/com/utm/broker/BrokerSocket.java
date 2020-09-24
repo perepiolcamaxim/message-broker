@@ -1,6 +1,7 @@
 package com.utm.broker;
 import com.utm.common.ConnectionSetting;
 import java.io.IOException;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -31,9 +32,11 @@ public class BrokerSocket
 
                 thread.start();
             }
-            catch (IOException e)
+            catch (BindException e)
             {
-                System.out.println("Can't bind socket!");
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }

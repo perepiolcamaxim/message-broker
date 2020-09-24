@@ -3,6 +3,7 @@ package com.utm.publicher;
 import com.utm.common.ConnectionSetting;
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 
 public class PublisherSocket
@@ -15,6 +16,10 @@ public class PublisherSocket
         try
         {
             socket = new Socket(ip, port);
+        }
+        catch (ConnectException e)
+        {
+            e.printStackTrace();
         }
         catch (IOException e)
         {

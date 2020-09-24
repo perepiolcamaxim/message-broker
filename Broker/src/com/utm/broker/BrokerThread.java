@@ -50,6 +50,10 @@ public class BrokerThread implements Runnable
             reader.close();
             clientSocket.close();
         }
+        catch (InterruptedIOException e)
+        {
+            e.printStackTrace();
+        }
         catch (IOException e)
         {
             System.out.println("Client disconected");
