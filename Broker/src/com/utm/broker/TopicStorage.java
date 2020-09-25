@@ -10,7 +10,7 @@ public class TopicStorage
 {
     public static Map<String, ArrayList<String>> topicsAndMessages =
             Collections.synchronizedMap(new HashMap<String, ArrayList<String>>());
-    public static ArrayList<String> itemsList = null;
+    private static ArrayList<String> itemsList = null;
 
     public static synchronized void addToStorage(Payload payload)
     {

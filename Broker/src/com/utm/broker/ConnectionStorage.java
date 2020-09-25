@@ -37,4 +37,17 @@ public class ConnectionStorage         // se stocheza conexiunile
             }
         }
     }
+
+    public static ArrayList<ConnectionInfo> getConnectionsByTopic(String topic)
+    {
+        ArrayList<ConnectionInfo> connectionsByTopic = new ArrayList<>();
+        for (ConnectionInfo connection:connections)
+        {
+            if(connection.payload.getTopic().equalsIgnoreCase(topic))
+            {
+                connectionsByTopic.add(connection);
+            }
+        }
+        return connectionsByTopic;
+    }
 }
