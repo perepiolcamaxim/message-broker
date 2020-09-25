@@ -1,44 +1,63 @@
 package com.utm.broker;
 
 import com.utm.common.ConnectionInfo;
-
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 public class Worker
 {
     public void send()
     {
-        new Thread(new Runnable() {
+        new Thread(new Runnable()
+        {
             public void run()
             {
                 while(true)
                 {
-                    while (!ConnectionStorage.connections.isEmpty())
+                    while(!TopicStorage.topicsAndMessages.isEmpty())
                     {
-                        for (ConnectionInfo connectionInfo : ConnectionStorage.connections)
+                        while(!ConnectionStorage.connections.isEmpty())
                         {
-                            try
-                            {
-                                PrintWriter writer = new PrintWriter(connectionInfo.socket.getOutputStream());
+                            ArrayList<String> messages = TopicStorage.topicsAndMessages.get("sport");
+                            ArrayList<ConnectionInfo> clients = ConnectionStorage.getConnectionsByTopic("sport");
 
-                                writer.println("Message from topic!" + connectionInfo.payload.getTopic());
-                                writer.flush();
-                            }
-                            catch (IOException e)
+                            for (String message : messages)
                             {
-                                e.printStackTrace();
+                                for (ConnectionInfo connectionInfo : clients)
+                                {
+                                    try
+                                    {
+                                        PrintWriter writer = new PrintWriter(connectionInfo.socket.getOutputStream());
+
+                                        writer.println(message);
+                                        writer.flush();
+                                        Thread.sleep(1000);
+                                    } catch (IOException | InterruptedException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+                                }
                             }
                         }
                         try
                         {
-                            Thread.sleep(3000);
+                            Thread.sleep(2000);
                         }
                         catch (InterruptedException e)
                         {
                             System.out.println("Can't sleep the worker thread");
                             e.printStackTrace();
                         }
+                    }
+                    try
+                    {
+                        Thread.sleep(2000);
+                    }
+                    catch (InterruptedException e)
+                    {
+                        System.out.println("Can't sleep the worker thread");
+                        e.printStackTrace();
                     }
                 }
             }
