@@ -14,7 +14,7 @@ public class TopicStorage
     {
         if(searchIfTopicExists(payload.getTopic()) == 1)
         {
-            topicsAndMessages.get(payload.getTopic()).add(payload.getMessage());
+            topicsAndMessages.get(payload.getTopic().toLowerCase()).add(payload.getMessage());
         }
         else {
             itemsList = new LinkedList<String>();
