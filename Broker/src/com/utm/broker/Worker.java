@@ -4,6 +4,7 @@ import com.utm.common.ConnectionInfo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class Worker
 {
@@ -19,25 +20,22 @@ public class Worker
                     {
                         while(!ConnectionStorage.connections.isEmpty())
                         {
-                            ArrayList<String> messages = TopicStorage.topicsAndMessages.get("sport");
+                            Queue<String> messages = TopicStorage.topicsAndMessages.get("sport");
                             ArrayList<ConnectionInfo> clients = ConnectionStorage.getConnectionsByTopic("sport");
 
-                            for (String message : messages)
-                            {
-                                for (ConnectionInfo connectionInfo : clients)
-                                {
-                                    try
-                                    {
+                            for (String message : messages) {
+                                for (ConnectionInfo connectionInfo : clients) {
+                                    try {
                                         PrintWriter writer = new PrintWriter(connectionInfo.socket.getOutputStream());
 
                                         writer.println(message);
                                         writer.flush();
                                         Thread.sleep(1000);
-                                    } catch (IOException | InterruptedException e)
-                                    {
+                                    } catch (IOException | InterruptedException e) {
                                         e.printStackTrace();
                                     }
                                 }
+                                TopicStorage.topicsAndMessages.get("sport").remove(message);
                             }
                         }
                         try
