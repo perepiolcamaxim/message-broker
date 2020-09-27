@@ -40,6 +40,14 @@ public class Worker
                                             e.printStackTrace();
                                         }
                                     }
+                                    try
+                                    {
+                                        Thread.sleep(2000);
+                                    }
+                                    catch (InterruptedException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
                                     PayloadStorage.remove(payload);
                                 }
                             }

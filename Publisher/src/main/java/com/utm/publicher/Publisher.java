@@ -16,7 +16,7 @@ public class Publisher
 
         PublisherSocket publisherSocket = new PublisherSocket(ConnectionSetting.IP, ConnectionSetting.PORT);
 
-        int id = 1;
+        int id = 0;
         String topic, message;
 
         Gson gson = new GsonBuilder().create();

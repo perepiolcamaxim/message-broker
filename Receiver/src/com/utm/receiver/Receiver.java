@@ -13,10 +13,11 @@ public class Receiver
         System.out.println("com.utm.receiver.Receiver...");
         Scanner scanner = new Scanner(System.in);
 
+        int ID = 2;
         System.out.println("Enter the topic:");
         String topic = scanner.nextLine();
 
-        Payload payload = new Payload(4, topic, null);
+        Payload payload = new Payload(ID, topic, null);
 
         ReceiveSocket socket = new ReceiveSocket(ConnectionSetting.IP, ConnectionSetting.PORT);
 
