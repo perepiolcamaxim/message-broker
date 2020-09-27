@@ -8,17 +8,18 @@ import java.net.Socket;
 public class ReceiveSocket
 {
     private Socket socket;
-    private PayloadHandler handler = new PayloadHandler();
+    private PayloadHandler handler;
     private BufferedReader reader;
     private PrintWriter writer;
 
-    public void connect(String ip, int port)
+    public ReceiveSocket(String ip, int port)
     {
         try
         {
             socket = new Socket(ip, port);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream());
+            handler = new PayloadHandler();
         }
         catch (IOException e)
         {
@@ -29,7 +30,6 @@ public class ReceiveSocket
 
     public void send(String payload)
     {
-        connect(ConnectionSetting.IP, ConnectionSetting.PORT);
         try
         {
             writer.println(payload);
