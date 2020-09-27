@@ -2,6 +2,7 @@ package com.utm.publicher;
 
 
 import java.io.*;
+import java.net.ConnectException;
 import java.net.Socket;
 
 public class PublisherSocket
@@ -18,6 +19,10 @@ public class PublisherSocket
             socket = new Socket(ip, port);
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             writer = new PrintWriter(socket.getOutputStream());
+        }
+        catch (ConnectException e)
+        {
+            e.printStackTrace();
         }
         catch (IOException e)
         {

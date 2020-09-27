@@ -1,13 +1,13 @@
 package com.utm.broker;
 import com.utm.common.ConnectionSetting;
 import java.io.IOException;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
 public class BrokerSocket
 {
     private ServerSocket serverSocket;
-    private Socket clientSocket;
 
     public void start()
     {
@@ -24,16 +24,15 @@ public class BrokerSocket
         {
             try
             {
-                clientSocket = serverSocket.accept();
+                Socket clientSocket = serverSocket.accept();
 
                 BrokerThread brokerThread = new BrokerThread(clientSocket);  // se creaza thread nou
                 Thread thread = new Thread(brokerThread);
 
                 thread.start();
-            }
-            catch (IOException e)
+            } catch (IOException e)
             {
-                System.out.println("Can't bind socket!");
+                e.printStackTrace();
             }
         }
     }

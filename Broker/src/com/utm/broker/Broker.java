@@ -1,5 +1,4 @@
 package com.utm.broker;
-import java.io.IOException;
 
 public class Broker
 {

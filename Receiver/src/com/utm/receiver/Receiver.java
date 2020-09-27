@@ -4,13 +4,19 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.utm.common.Payload;
 
+import java.util.Scanner;
+
 public class Receiver
 {
     public static void main(String[] args)
     {
         System.out.println("com.utm.receiver.Receiver...");
+        Scanner scanner = new Scanner(System.in);
 
-        Payload payload = new Payload(0, "sport", null);
+        System.out.println("Enter the topic:");
+        String topic = scanner.nextLine();
+
+        Payload payload = new Payload(0, topic, null);
 
         ReceiveSocket socket = new ReceiveSocket();
 

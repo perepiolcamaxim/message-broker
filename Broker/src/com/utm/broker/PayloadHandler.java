@@ -2,10 +2,7 @@ package com.utm.broker;
 
 import com.utm.common.ConnectionInfo;
 import com.utm.common.Payload;
-
 import java.net.Socket;
-
-import static com.utm.broker.TopicStorage.addToStorage;
 
 public class PayloadHandler          // se lamureste ce sa faca cu inputul
 {
@@ -24,11 +21,20 @@ public class PayloadHandler          // se lamureste ce sa faca cu inputul
             ConnectionStorage.print();
             return 0;
         }
-        else      // e publisher, vezi ce topic contine si pune mesajul in storage
+        else if(payload.getId() == 1)     // e publisher, vezi ce topic contine si pune mesajul in storage
         {
-            TopicStorage.addToStorage(payload);
-            System.out.println(TopicStorage.topicsAndMessages);
+            PayloadStorage.add(payload);
             return 1;
+        }
+        else if(payload.getId() == 3)
+        {
+            //TO DO
+            // ia cuvintul cheie si trimite-i stiri ce contin acest cuvint
+            return 2;
+        }
+        else
+        {
+            return -1;
         }
     }
 }

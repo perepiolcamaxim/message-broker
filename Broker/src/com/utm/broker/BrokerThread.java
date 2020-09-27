@@ -7,8 +7,8 @@ import java.net.Socket;
 
 public class BrokerThread implements Runnable
 {
-    private Socket clientSocket;
-    private PayloadHandler handler;
+    private final Socket clientSocket;
+    private final PayloadHandler handler;
     private PrintWriter writer = null;
     private BufferedReader reader = null;
 
@@ -42,16 +42,14 @@ public class BrokerThread implements Runnable
 
                 outputLine = handler.handle(clientSocket, payload);
 
-                if (outputLine == 1)
-                {
-                    writer.println("Payload received!");
-                    writer.flush();
-                } else
-                {
-                    writer.println("Hello receiver!");
-                    writer.flush();
-                }
+                // daca id == 3, trimitei stiri ce contine cuvintul cheie
+                //writer.println(outputLine);
+                //writer.flush();
             }
+        }
+        catch (InterruptedIOException e)
+        {
+            e.printStackTrace();
         }
         catch (IOException e)
         {
