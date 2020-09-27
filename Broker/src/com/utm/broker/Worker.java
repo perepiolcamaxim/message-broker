@@ -1,6 +1,8 @@
 package com.utm.broker;
 
 import com.utm.common.ConnectionInfo;
+import com.utm.common.Payload;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,45 +18,39 @@ public class Worker
             {
                 while(true)
                 {
-                    while(!TopicStorage.topicsAndMessages.isEmpty())
+                    while(!PayloadStorage.isEmpty())
                     {
-                        while(!ConnectionStorage.connections.isEmpty())
+                        if(!ConnectionStorage.connections.isEmpty())
                         {
-                            Queue<String> messages = TopicStorage.topicsAndMessages.get("sport");
-                            ArrayList<ConnectionInfo> clients = ConnectionStorage.getConnectionsByTopic("sport");
-
-                            for (String message : messages) {
-                                for (ConnectionInfo connectionInfo : clients) {
-                                    try {
-                                        PrintWriter writer = new PrintWriter(connectionInfo.socket.getOutputStream());
-
-                                        writer.println(message);
-                                        writer.flush();
-                                        Thread.sleep(1000);
-                                    } catch (IOException | InterruptedException e) {
-                                        e.printStackTrace();
+                            Payload payload = PayloadStorage.getNext();
+                            if(payload != null)
+                            {
+                                ArrayList<ConnectionInfo> clients = ConnectionStorage.getConnectionsByTopic(payload.getTopic());
+                                if(!clients.isEmpty())
+                                {
+                                    for (ConnectionInfo client : clients)
+                                    {
+                                        try
+                                        {
+                                            PrintWriter writer = new PrintWriter(client.socket.getOutputStream());
+                                            writer.println(payload.getMessage());
+                                            writer.flush();
+                                        } catch (IOException e)
+                                        {
+                                            e.printStackTrace();
+                                        }
                                     }
+                                    PayloadStorage.remove(payload);
                                 }
-                                TopicStorage.topicsAndMessages.get("sport").remove(message);
                             }
-                        }
-                        try
-                        {
-                            Thread.sleep(2000);
-                        }
-                        catch (InterruptedException e)
-                        {
-                            System.out.println("Can't sleep the worker thread");
-                            e.printStackTrace();
                         }
                     }
                     try
                     {
-                        Thread.sleep(2000);
+                        Thread.sleep(500);
                     }
                     catch (InterruptedException e)
                     {
-                        System.out.println("Can't sleep the worker thread");
                         e.printStackTrace();
                     }
                 }

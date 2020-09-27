@@ -1,11 +1,33 @@
 package com.utm.broker;
 
 import com.utm.common.Payload;
-
 import java.util.*;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
-public class TopicStorage
+public class PayloadStorage
 {
+    public static Queue<Payload> payloads = new ConcurrentLinkedDeque<Payload>();
+
+    public static void add(Payload payload)
+    {
+        payloads.add(payload);
+    }
+
+    public static Payload getNext()
+    {
+        return payloads.peek();
+    }
+
+    public static boolean isEmpty()
+    {
+        return payloads.isEmpty();
+    }
+
+    public static boolean remove(Payload payload)
+    {
+        return payloads.remove(payload);
+    }
+    /*
     public static Map<String, Queue<String>> topicsAndMessages =
             Collections.synchronizedMap(new HashMap<String, Queue<String>>());
     private static Queue<String> itemsList = null;
@@ -35,4 +57,13 @@ public class TopicStorage
         return 0;
     }
 
+    public static Set<String> getTopics()
+    {
+        if(topicsAndMessages != null)
+        {
+            return topicsAndMessages.keySet();
+        }
+        return null;
+    }
+     */
 }
