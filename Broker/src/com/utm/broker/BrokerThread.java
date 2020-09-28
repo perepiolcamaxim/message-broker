@@ -42,9 +42,14 @@ public class BrokerThread implements Runnable
 
                 outputLine = handler.handle(clientSocket, payload);
 
-                // daca id == 3, trimitei stiri ce contine cuvintul cheie
-                //writer.println(outputLine);
-                //writer.flush();
+                if(outputLine == 2)
+                {
+                    writer.println("By receiver!");
+                    writer.flush();
+                    writer.close();
+                    reader.close();
+                    clientSocket.close();
+                }
             }
         }
         catch (InterruptedIOException e)
