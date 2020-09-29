@@ -40,16 +40,7 @@ public class BrokerThread implements Runnable
                 Gson gson = new Gson();
                 Payload payload = gson.fromJson(inputLine, Payload.class);
 
-                outputLine = handler.handle(clientSocket, payload);
-
-                if(outputLine == 2)
-                {
-                    writer.println("By receiver!");
-                    writer.flush();
-                    writer.close();
-                    reader.close();
-                    clientSocket.close();
-                }
+                handler.handle(clientSocket, payload);
             }
         }
         catch (InterruptedIOException e)

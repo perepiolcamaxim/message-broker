@@ -13,7 +13,7 @@ public class Receiver
         System.out.println("com.utm.receiver.Receiver...");
         Scanner scanner = new Scanner(System.in);
 
-        int ID = 2;
+        int ID = 1;
         System.out.println("Enter the topic:");
         String topic = scanner.nextLine();
 
