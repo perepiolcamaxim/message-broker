@@ -4,8 +4,9 @@ option java_package = "com.utm.broker.rcp";
 package com.utm.broker;
 
 message BrokerRequest {
-  string topic = 1;
-  string message = 2;
+  int32 id = 1;
+  string topic = 2;
+  string message = 3;
 }
 
 message BrokerResponse {
@@ -13,5 +14,5 @@ message BrokerResponse {
 }
 
 service BrokerService {
-  rpc hello(BrokerRequest) returns (BrokerResponse);
+  rpc hello(BrokerRequest) returns (stream BrokerResponse);
 }
