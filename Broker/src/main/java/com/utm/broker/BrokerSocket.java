@@ -1,5 +1,5 @@
 package com.utm.broker;
-import com.utm.common.ConnectionSetting;
+import common.ConnectionSetting;
 import java.io.IOException;
 import java.net.BindException;
 import java.net.ServerSocket;

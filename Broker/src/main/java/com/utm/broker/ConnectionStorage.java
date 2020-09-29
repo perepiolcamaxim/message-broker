@@ -1,5 +1,7 @@
 package com.utm.broker;
-import com.utm.common.ConnectionInfo;
+
+import common.ConnectionInfo;
+
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;

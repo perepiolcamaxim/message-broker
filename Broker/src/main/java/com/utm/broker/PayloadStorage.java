@@ -1,6 +1,6 @@
 package com.utm.broker;
 
-import com.utm.common.Payload;
+import common.Payload;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedDeque;
 

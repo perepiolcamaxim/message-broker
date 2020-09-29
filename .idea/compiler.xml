@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Publisher" />
         <module name="PAD_Lab1" />
+        <module name="Broker" />
+        <module name="Publisher" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Broker" target="1.5" />
       <module name="PAD_Lab1" target="1.8" />
       <module name="Publisher" target="1.8" />
     </bytecodeTargetLevel>

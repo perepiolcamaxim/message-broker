@@ -1,7 +1,7 @@
 package com.utm.broker;
 
 import com.google.gson.Gson;
-import com.utm.common.Payload;
+import common.Payload;
 import java.io.*;
 import java.net.Socket;
 

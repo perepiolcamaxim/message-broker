@@ -1,7 +1,7 @@
 package com.utm.broker;
 
-import com.utm.common.ConnectionInfo;
-import com.utm.common.Payload;
+import common.ConnectionInfo;
+import common.Payload;
 
 import java.io.IOException;
 import java.io.PrintWriter;
