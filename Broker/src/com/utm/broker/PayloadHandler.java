@@ -12,14 +12,13 @@ public class PayloadHandler          // se lamureste ce sa faca cu inputul
 {
     private Socket clientSocket;
 
-    public int handle(Socket clientSocket, Payload payload)
+    public void handle(Socket clientSocket, Payload payload)
     {
         this.clientSocket = clientSocket;
 
         if(payload.getId() == 0)       // e publisher, vezi ce topic contine si pune mesajul in storage
         {
             PayloadStorage.add(payload);
-            return 1;
         }
         else if(payload.getId() == 1)      // receiverul poate se aboneaza la mai multe topicuri, delimitate cu "&"
         {
@@ -34,7 +33,6 @@ public class PayloadHandler          // se lamureste ce sa faca cu inputul
             }
             System.out.println("Lista de receiveri:");
             ConnectionStorage.print();
-            return 1;
         }
         else if(payload.getId() == 2)// ia cuvintul cheie si trimite-i stiri ce contin acest cuvint
         {
@@ -55,11 +53,28 @@ public class PayloadHandler          // se lamureste ce sa faca cu inputul
                     }
                 }
             }
-            return 2;
+            assert writer != null;
+            writer.println("By receiver!");
+            writer.flush();
+            writer.close();
+            try
+            {
+                clientSocket.close();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
         else
         {
-            return -1;
+            System.out.println("Invalid id");
+            try
+            {
+                clientSocket.close();
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 }
