@@ -10,9 +10,10 @@ message BrokerRequest {
 }
 
 message BrokerResponse {
-  string greeting = 1;
+  string responseMessage = 1;
+  string responseCode = 2;
 }
 
-service BrokerService {
+service Broker {
   rpc hello(BrokerRequest) returns (stream BrokerResponse);
 }
