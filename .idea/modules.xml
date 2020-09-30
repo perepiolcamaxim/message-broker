@@ -5,8 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/Broker/Broker.iml" filepath="$PROJECT_DIR$/Broker/Broker.iml" />
       <module fileurl="file://$PROJECT_DIR$/Common/Common.iml" filepath="$PROJECT_DIR$/Common/Common.iml" />
       <module fileurl="file://$PROJECT_DIR$/PAD_Lab1.iml" filepath="$PROJECT_DIR$/PAD_Lab1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Publisher/Publisher.iml" filepath="$PROJECT_DIR$/Publisher/Publisher.iml" />
       <module fileurl="file://$PROJECT_DIR$/Receiver/Receiver.iml" filepath="$PROJECT_DIR$/Receiver/Receiver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Sender/Sender.iml" filepath="$PROJECT_DIR$/Sender/Sender.iml" />
     </modules>
   </component>
 </project>
