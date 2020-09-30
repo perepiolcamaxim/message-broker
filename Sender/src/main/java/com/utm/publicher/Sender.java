@@ -3,7 +3,7 @@ package com.utm.publicher;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.utm.common.ConnectionSetting;
-import com.utm.common.Payload;
+import com.utm.common.rcp.publisher.Payload;
 import com.utm.common.rcp.publisher.PublishRequest;
 import com.utm.common.rcp.publisher.PublishResponse;
 import com.utm.common.rcp.publisher.PublisherGrpc;
@@ -19,9 +19,9 @@ public class Sender {
 
         //   PublisherSocket publisherSocket = new PublisherSocket(ConnectionSetting.IP, ConnectionSetting.PORT);
 
-        int id = 0;
+        Integer id = 0;
         String topic, message;
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("127.0.0.1", ConnectionSetting.PORT).usePlaintext().build();
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(ConnectionSetting.IP, ConnectionSetting.PORT).usePlaintext().build();
         PublisherGrpc.PublisherBlockingStub stub = PublisherGrpc.newBlockingStub(channel);
         Gson gson = new GsonBuilder().create();
 
@@ -31,7 +31,8 @@ public class Sender {
         topic = scanner.nextLine();
         System.out.println("Enter the message:");
         message = scanner.nextLine();
-        PublishRequest request = PublishRequest.newBuilder().setId(id).setTopic(topic).setMessage(message).build();
+        Payload payload = Payload.newBuilder().setId(id).setTopic(topic).setMessage(message).build();
+        PublishRequest request = PublishRequest.newBuilder().addPayload(payload).build();
         PublishResponse response = stub.publishMessage(request);
         System.out.println("Response : " + response.getIsSuccess());
 
