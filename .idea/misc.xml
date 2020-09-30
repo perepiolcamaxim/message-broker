@@ -8,6 +8,7 @@
         <option value="$PROJECT_DIR$/Broker/pom.xml" />
         <option value="$PROJECT_DIR$/Common/pom.xml" />
         <option value="$PROJECT_DIR$/Receiver/pom.xml" />
+        <option value="$PROJECT_DIR$/Sender/pom.xml" />
       </list>
     </option>
   </component>

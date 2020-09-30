@@ -1,7 +1,5 @@
 package com.utm.publicher;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.utm.common.ConnectionSetting;
 import com.utm.common.rcp.publisher.Payload;
 import com.utm.common.rcp.publisher.PublishRequest;
