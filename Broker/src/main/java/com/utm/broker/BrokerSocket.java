@@ -1,7 +1,8 @@
 package com.utm.broker;
-import common.ConnectionSetting;
+
+import com.utm.common.ConnectionSetting;
+
 import java.io.IOException;
-import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
 

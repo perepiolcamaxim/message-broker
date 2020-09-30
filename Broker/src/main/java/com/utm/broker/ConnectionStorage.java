@@ -1,6 +1,6 @@
 package com.utm.broker;
 
-import common.ConnectionInfo;
+import com.utm.common.*;
 
 import java.net.Socket;
 import java.util.ArrayList;

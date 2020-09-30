@@ -4,7 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.utm.common.ConnectionSetting;
 import com.utm.common.Payload;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 
+
+import java.nio.channels.Channel;
 import java.util.Scanner;
 
 public class Publisher
@@ -18,7 +22,7 @@ public class Publisher
 
         int id = 0;
         String topic, message;
-
+//        ManagedChannel channel = ManagedChannelBuilder.;
         Gson gson = new GsonBuilder().create();
 
         while(true)

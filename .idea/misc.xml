@@ -6,6 +6,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/Publisher/pom.xml" />
         <option value="$PROJECT_DIR$/Broker/pom.xml" />
+        <option value="$PROJECT_DIR$/Common/pom.xml" />
       </list>
     </option>
   </component>

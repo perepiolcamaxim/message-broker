@@ -1,7 +1,7 @@
 syntax = "proto3";
 option java_multiple_files = true;
-option java_package = "com.utm.broker.rcp";
-package com.utm.broker;
+option java_package = "com.utm.common.rcp.broker";
+package com.utm.common;
 
 message BrokerRequest {
   int32 id = 1;
