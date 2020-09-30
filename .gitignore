@@ -1,2 +1,7 @@
 # Project exclude paths
 /out/
+/Broker/target/
+/Common/target/
+/Receiver/target/
+/Sender/target/
+/target/
