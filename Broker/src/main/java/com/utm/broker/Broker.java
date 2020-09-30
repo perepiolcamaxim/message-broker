@@ -2,6 +2,7 @@ package com.utm.broker;
 
 
 import com.utm.broker.services.PublisherService;
+import com.utm.broker.services.ReceiverService;
 import com.utm.common.ConnectionSetting;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -9,11 +10,11 @@ import io.grpc.ServerBuilder;
 import java.io.IOException;
 
 public class Broker {
-    public static void main(String[] args){
-//        Worker worker = new Worker();
-//        worker.send();
+    public static void main(String[] args) {
+        Worker worker = new Worker();
+        worker.send();
         System.out.println("Broker...");
-        Server server = ServerBuilder.forPort(ConnectionSetting.PORT).addService(new PublisherService()).build();
+        Server server = ServerBuilder.forPort(ConnectionSetting.PORT).addService(new PublisherService()).addService(new ReceiverService()).build();
         try {
             server.start();
             System.out.println("Server started on " + server.getPort());
@@ -25,7 +26,5 @@ public class Broker {
         } catch (InterruptedException e) {
             System.out.println("Await Termination!!!");
         }
-//        BrokerSocket brokerSocket = new BrokerSocket();
-//        brokerSocket.start();
     }
 }

@@ -1,14 +1,14 @@
 package com.utm.common;
+
+import com.utm.common.rcp.publisher.Payload;
+
 import java.net.Socket;
 
-public class ConnectionInfo
-{
-    public Socket socket;
+public class ConnectionInfo {
+   // public Stub stub;
     public Payload payload;
 
-    public ConnectionInfo(Socket socket, Payload payload)
-    {
-        this.socket = socket;
+    public ConnectionInfo(Payload payload) {
         this.payload = payload;
     }
 }

@@ -1,12 +1,9 @@
 package com.utm.broker;
 
 import com.utm.common.ConnectionInfo;
-import com.utm.common.Payload;
+import com.utm.common.rcp.publisher.Payload;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Queue;
 
 public class Worker
 {
@@ -25,20 +22,20 @@ public class Worker
                             Payload payload = PayloadStorage.getNext();
                             if(payload != null)
                             {
-                                ArrayList<ConnectionInfo> clients = ConnectionStorage.getConnectionsByTopic(payload.getTopic());
+                                ArrayList<Connection> clients = ConnectionStorage.getConnectionsByTopic(payload.getTopic());
                                 if(!clients.isEmpty())
                                 {
-                                    for (ConnectionInfo client : clients)
+                                    for (Connection client : clients)
                                     {
-                                        try
-                                        {
-                                            PrintWriter writer = new PrintWriter(client.socket.getOutputStream());
-                                            writer.println(payload.getMessage());
-                                            writer.flush();
-                                        } catch (IOException e)
-                                        {
-                                            e.printStackTrace();
-                                        }
+//                                        try
+//                                        {
+////                                            PrintWriter writer = new PrintWriter(client.socket.getOutputStream());
+////                                            writer.println(payload.getMessage());
+////                                            writer.flush();
+//                                        } catch (IOException e)
+//                                        {
+//                                            e.printStackTrace();
+//                                        }
                                     }
                                     try
                                     {

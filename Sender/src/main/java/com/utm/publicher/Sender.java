@@ -23,22 +23,19 @@ public class Sender {
         String topic, message;
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ConnectionSetting.IP, ConnectionSetting.PORT).usePlaintext().build();
         PublisherGrpc.PublisherBlockingStub stub = PublisherGrpc.newBlockingStub(channel);
-        Gson gson = new GsonBuilder().create();
 
-        // while(true)
-        // {
-        System.out.println("Enter the topic:");
-        topic = scanner.nextLine();
-        System.out.println("Enter the message:");
-        message = scanner.nextLine();
-        Payload payload = Payload.newBuilder().setId(id).setTopic(topic).setMessage(message).build();
-        PublishRequest request = PublishRequest.newBuilder().addPayload(payload).build();
-        PublishResponse response = stub.publishMessage(request);
-        System.out.println("Response : " + response.getIsSuccess());
-
-        // Payload payload = new Payload(id, topic, message);
-        //String payloadInJsonString = gson.toJson(payload);
-        //publisherSocket.send(payloadInJsonString);
-        // }
+        while (true) {
+            System.out.println("Enter the topic:");
+            topic = scanner.nextLine();
+            System.out.println("Enter the message:");
+            message = scanner.nextLine();
+            Payload payload = Payload.newBuilder().setId(id).setTopic(topic).setMessage(message).build();
+            PublishRequest request = PublishRequest.newBuilder().addPayload(payload).build();
+            PublishResponse response = stub.publishMessage(request);
+            System.out.println("Response : " + response.getIsSuccess());
+            // Payload payload = new Payload(id, topic, message);
+            //String payloadInJsonString = gson.toJson(payload);
+            //publisherSocket.send(payloadInJsonString);
+        }
     }
 }

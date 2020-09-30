@@ -10,12 +10,14 @@
         <module name="PAD_Lab1" />
         <module name="Broker" />
         <module name="Common" />
+        <module name="Receiver" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Broker" target="1.8" />
       <module name="Common" target="1.8" />
       <module name="PAD_Lab1" target="1.8" />
+      <module name="Receiver" target="1.8" />
       <module name="Sender" target="1.8" />
     </bytecodeTargetLevel>
   </component>
