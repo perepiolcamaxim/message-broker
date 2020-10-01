@@ -44,16 +44,27 @@ public class Receiver
 
         SubscriberGrpc.SubscriberBlockingStub stub = SubscriberGrpc.newBlockingStub(channel);
 
-        System.out.println("Enter the topic:");
-        topic = scanner.nextLine();
 
-        //SubscribeRequest request = SubscribeRequest.newBuilder().setAddress(ConnectionSetting.IP+ ":" + port).setTopic(topic).build();
-        GetNewsRequest request = GetNewsRequest.newBuilder().setTopic(topic).build();
-        //SubscribeResponse response = stub.subscribe(request);
-       GetNewsResponse response = stub.getNewsByKeyWord(request);
+        System.out.println("1. Find by keyword.");
+        System.out.println("2. Subscribe to topic.");
 
-        System.out.println("Response : \n" + response.getMessages());
+        String state = scanner.nextLine();
 
+        if(Integer.parseInt(state) == 1)
+        {
+            System.out.println("Enter the keyword: ");
+            topic = scanner.nextLine();
+            GetNewsRequest request = GetNewsRequest.newBuilder().setTopic(topic).build();
+            GetNewsResponse response = stub.getNewsByKeyWord(request);
+            System.out.println("Response : \n" + response.getMessages());
+        }
+        else{
+            System.out.println("Enter the topic:");
+            topic = scanner.nextLine();
+            SubscribeRequest request = SubscribeRequest.newBuilder().setAddress(ConnectionSetting.IP+ ":" + port).setTopic(topic).build();
+            SubscribeResponse response = stub.subscribe(request);
+
+        }
         try
         {
             server.awaitTermination();

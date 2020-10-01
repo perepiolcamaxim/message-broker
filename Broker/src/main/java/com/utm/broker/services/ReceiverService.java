@@ -21,6 +21,7 @@ public class ReceiverService extends SubscriberGrpc.SubscriberImplBase
         ConnectionStorage.print();
 
         SubscribeResponse.Builder response = SubscribeResponse.newBuilder();
+        response.setIsSuccess(true);
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }
