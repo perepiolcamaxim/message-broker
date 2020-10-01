@@ -44,7 +44,6 @@ public class Receiver
 
         SubscriberGrpc.SubscriberBlockingStub stub = SubscriberGrpc.newBlockingStub(channel);
 
-
         System.out.println("1. Find by keyword.");
         System.out.println("2. Subscribe to topic.");
 

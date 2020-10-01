@@ -34,7 +34,7 @@ public class Worker
                                 {
                                     for (Connection connection : connectionsByTopic)
                                     {
-                                        System.out.println("Trying to notify subscriber -" + connection.getAddress());
+                                        System.out.println("Trying to notify subscriber - " + connection.getAddress());
                                         NotifierGrpc.NotifierBlockingStub stub = NotifierGrpc.newBlockingStub(connection.getChannel());
                                         NotifyRequest request = NotifyRequest.newBuilder().setContent(payload.getMessage()).build();
                                         try

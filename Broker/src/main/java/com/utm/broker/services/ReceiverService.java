@@ -23,12 +23,8 @@ public class ReceiverService extends SubscriberGrpc.SubscriberImplBase
             Connection connection = new Connection(request.getAddress(), topic);
             ConnectionStorage.add(connection); //se salveaza conexiunea in storage
         }
-
-
         System.out.println("Lista de receiveri:");
-
         ConnectionStorage.print();
-
         SubscribeResponse.Builder response = SubscribeResponse.newBuilder();
         response.setIsSuccess(true);
         responseObserver.onNext(response.build());
@@ -39,7 +35,6 @@ public class ReceiverService extends SubscriberGrpc.SubscriberImplBase
     public void getNewsByKeyWord(GetNewsRequest request, StreamObserver<GetNewsResponse> responseObserver)
     {
         String news = "";
-
         int i = 0;
         for(Payload payload:PayloadStorage.getPayloads())
         {
