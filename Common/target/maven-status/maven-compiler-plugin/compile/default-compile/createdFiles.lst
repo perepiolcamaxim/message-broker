@@ -1,4 +1,5 @@
 com\utm\common\rcp\notifier\NotifyResponse$Builder.class
+com\utm\common\rcp\subscriber\GetNewsResponseOrBuilder.class
 com\utm\common\rcp\subscriber\SubscriberGrpc$SubscriberStub.class
 com\utm\common\rcp\subscriber\SubscriberGrpc$SubscriberBlockingStub.class
 com\utm\common\rcp\notifier\NotifyRequest.class
@@ -22,7 +23,9 @@ com\utm\common\rcp\notifier\NotifierGrpc$NotifierBaseDescriptorSupplier.class
 com\utm\common\rcp\subscriber\SubscribeRequest$1.class
 com\utm\common\rcp\notifier\NotifyResponse$1.class
 com\utm\common\rcp\subscriber\SubscribeResponse$1.class
+com\utm\common\rcp\subscriber\GetNewsRequest$1.class
 com\utm\common\rcp\notifier\NotifierGrpc$1.class
+com\utm\common\rcp\subscriber\GetNewsRequest.class
 com\utm\common\rcp\subscriber\SubscriberGrpc$SubscriberMethodDescriptorSupplier.class
 com\utm\common\rcp\subscriber\SubscriberGrpc.class
 com\utm\common\rcp\publisher\PublisherGrpc$PublisherMethodDescriptorSupplier.class
@@ -40,7 +43,9 @@ com\utm\common\rcp\notifier\NotifyRequestOrBuilder.class
 com\utm\common\rcp\subscriber\SubscribeResponse$Builder.class
 com\utm\common\rcp\notifier\NotifierGrpc$NotifierFileDescriptorSupplier.class
 com\utm\common\rcp\publisher\PublisherGrpc$PublisherFileDescriptorSupplier.class
+com\utm\common\rcp\subscriber\GetNewsRequest$Builder.class
 com\utm\common\rcp\subscriber\SubscribeRequest.class
+com\utm\common\rcp\subscriber\GetNewsResponse$Builder.class
 com\utm\common\rcp\notifier\NotifierOuterClass.class
 com\utm\common\rcp\notifier\NotifierGrpc$MethodHandlers.class
 com\utm\common\rcp\notifier\NotifyResponseOrBuilder.class
@@ -50,12 +55,15 @@ com\utm\common\rcp\publisher\PublisherGrpc$PublisherStub.class
 com\utm\common\rcp\publisher\PublishResponse$1.class
 com\utm\common\rcp\notifier\NotifierGrpc.class
 com\utm\common\rcp\subscriber\SubscriberGrpc$SubscriberFutureStub.class
+com\utm\common\rcp\subscriber\GetNewsResponse.class
 com\utm\common\rcp\notifier\NotifyResponse.class
 com\utm\common\rcp\publisher\PublishRequest$1.class
+com\utm\common\rcp\subscriber\GetNewsRequestOrBuilder.class
 com\utm\common\rcp\publisher\PublisherGrpc$PublisherImplBase.class
 com\utm\common\rcp\publisher\PublishRequest.class
 com\utm\common\rcp\subscriber\SubscribeRequest$Builder.class
 com\utm\common\rcp\notifier\NotifierGrpc$NotifierStub.class
+com\utm\common\rcp\subscriber\GetNewsResponse$1.class
 com\utm\common\rcp\publisher\PublishRequestOrBuilder.class
 com\utm\common\rcp\subscriber\SubscriberGrpc$SubscriberImplBase.class
 com\utm\common\rcp\publisher\PublishResponse$Builder.class

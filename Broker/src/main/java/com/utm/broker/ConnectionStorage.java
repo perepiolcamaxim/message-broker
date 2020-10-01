@@ -1,8 +1,5 @@
 package com.utm.broker;
 
-import com.utm.common.*;
-
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,6 +28,15 @@ public class ConnectionStorage // se stocheza conexiunile
         }
         return connectionsByTopic;
     }
+
+    public static boolean remove(Connection connection)
+    {
+        synchronized (connection)
+        {
+            return connections.remove(connection);
+        }
+    }
+
     public static void print()
     {
         System.out.println("Receivers:");

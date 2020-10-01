@@ -10,8 +10,7 @@ service Notifier
 
 message NotifyRequest
 {
-  string topic = 1;
-  string content = 2;
+  string content = 1;
 }
 
 message NotifyResponse

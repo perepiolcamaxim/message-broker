@@ -6,6 +6,7 @@ package com.utm.common;
 service Subscriber
 {
   rpc subscribe(SubscribeRequest) returns (SubscribeResponse);
+  rpc getNewsByKeyWord(GetNewsRequest) returns (GetNewsResponse);
 }
 
 message SubscribeRequest
@@ -17,4 +18,14 @@ message SubscribeRequest
 message SubscribeResponse
 {
   bool isSuccess = 1;
+}
+
+message GetNewsRequest
+{
+  string topic = 1;
+}
+
+message GetNewsResponse
+{
+  string messages = 1;
 }
