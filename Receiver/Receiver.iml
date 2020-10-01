@@ -33,5 +33,6 @@
     <orderEntry type="library" name="Maven: io.grpc:grpc-stub:1.27.0" level="project" />
     <orderEntry type="library" name="Maven: javax.annotation:javax.annotation-api:1.2" level="project" />
     <orderEntry type="module" module-name="Common" />
+    <orderEntry type="library" name="Maven: me.alexpanov:free-port-finder:1.0" level="project" />
   </component>
 </module>

@@ -5,15 +5,16 @@ import com.utm.common.rcp.publisher.Payload;
 import java.util.*;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
-public class PayloadStorage {
-    public static Queue<Payload> getPayloads() {
-        return payloads;
-    }
-
-    private static Queue<Payload> payloads = new ConcurrentLinkedDeque<Payload>();
+public class PayloadStorage
+{
+    private static final Queue<Payload> payloads = new ConcurrentLinkedDeque<Payload>();
 
     public static void add(Payload payload) {
         payloads.add(payload);
+    }
+
+    public static Queue<Payload> getPayloads() {
+        return payloads;
     }
 
     public static Payload getNext() {
@@ -26,5 +27,14 @@ public class PayloadStorage {
 
     public static void remove(Payload payload) {
         payloads.remove(payload);
+    }
+
+    public static void print()
+    {
+        System.out.println("Payloads:");
+        for(Payload payload : payloads)
+        {
+            System.out.println(payload.getId() + " " + payload.getTopic() + " " + payload.getMessage());
+        }
     }
 }

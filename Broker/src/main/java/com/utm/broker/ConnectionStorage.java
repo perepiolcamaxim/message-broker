@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ConnectionStorage         // se stocheza conexiunile
+public class ConnectionStorage // se stocheza conexiunile
 {
-
-
     static List<Connection> connections = Collections.synchronizedList(new ArrayList<Connection>());
 
     public static void add(Connection connectionInfo)
@@ -21,31 +19,10 @@ public class ConnectionStorage         // se stocheza conexiunile
         }
     }
 
-//    static void remove(Socket socket)
-//    {
-//        synchronized (connections)
-//        {
-//            connections.removeIf(connection -> (connection.socket.getInetAddress() == socket.getInetAddress())
-//                    && (connection.socket.getPort() == socket.getPort()));
-//        }
-//    }
-//
-//    static void print()
-//    {
-//        synchronized (connections)
-//        {
-//            for (Connection connectionInfo : connections)
-//            {
-//                System.out.println(connectionInfo.socket.getInetAddress() + " " + connectionInfo.socket.getPort() + " "
-//                        + connectionInfo.payload.getTopic());
-//            }
-//        }
-//    }
-
     public static ArrayList<Connection> getConnectionsByTopic(String topic)
     {
         ArrayList<Connection> connectionsByTopic = new ArrayList<>();
-        for (Connection connection:connections)
+        for (Connection connection : connections)
         {
             if(connection.getTopic().equalsIgnoreCase(topic))
             {
@@ -53,5 +30,13 @@ public class ConnectionStorage         // se stocheza conexiunile
             }
         }
         return connectionsByTopic;
+    }
+    public static void print()
+    {
+        System.out.println("Receivers:");
+        for(Connection connection : connections)
+        {
+            System.out.println(connection.address + " " + connection.topic);
+        }
     }
 }
