@@ -13,6 +13,8 @@ public class Broker
     public static void main(String[] args)
     {
         System.out.println("Broker...");
+        Worker worker = new Worker();
+        worker.send();
 
         Server server = ServerBuilder.forPort(ConnectionSetting.PORT)
                 .addService(new PublisherService())

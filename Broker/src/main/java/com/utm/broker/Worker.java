@@ -1,8 +1,6 @@
 package com.utm.broker;
 
-import com.utm.common.ConnectionInfo;
 import com.utm.common.rcp.publisher.Payload;
-
 import java.util.ArrayList;
 
 public class Worker
@@ -22,20 +20,13 @@ public class Worker
                             Payload payload = PayloadStorage.getNext();
                             if(payload != null)
                             {
-                                ArrayList<Connection> clients = ConnectionStorage.getConnectionsByTopic(payload.getTopic());
-                                if(!clients.isEmpty())
+                                ArrayList<Connection> connectionsByTopic = ConnectionStorage
+                                        .getConnectionsByTopic(payload.getTopic());
+                                if(!connectionsByTopic.isEmpty())
                                 {
-                                    for (Connection client : clients)
+                                    for (Connection connection : connectionsByTopic)
                                     {
-//                                        try
-//                                        {
-////                                            PrintWriter writer = new PrintWriter(client.socket.getOutputStream());
-////                                            writer.println(payload.getMessage());
-////                                            writer.flush();
-//                                        } catch (IOException e)
-//                                        {
-//                                            e.printStackTrace();
-//                                        }
+                                        // sent messege via channel
                                     }
                                     try
                                     {

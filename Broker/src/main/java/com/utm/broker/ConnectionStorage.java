@@ -36,7 +36,7 @@ public class ConnectionStorage // se stocheza conexiunile
         System.out.println("Receivers:");
         for(Connection connection : connections)
         {
-            System.out.println(connection.address + " " + connection.topic);
+            System.out.println(connection.getAddress() + " " + connection.getTopic());
         }
     }
 }
