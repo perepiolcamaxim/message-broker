@@ -8,25 +8,23 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 public class PayloadStorage
 {
     private static final Queue<Payload> payloads = new ConcurrentLinkedDeque<Payload>();
+    private static final Queue<Payload> payloadsForever = new ConcurrentLinkedDeque<Payload>();
 
     public static void add(Payload payload) {
         payloads.add(payload);
+        payloadsForever.add(payload);
     }
 
     public static Queue<Payload> getPayloads() {
-        return payloads;
+        return payloadsForever;
     }
 
     public static Payload getNext() {
-        return payloads.peek();
+        return payloads.poll();
     }
 
     public static boolean isEmpty() {
         return payloads.isEmpty();
-    }
-
-    public static void remove(Payload payload) {
-        payloads.remove(payload);
     }
 
     public static void print()

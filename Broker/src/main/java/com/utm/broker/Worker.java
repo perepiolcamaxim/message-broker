@@ -26,48 +26,44 @@ public class Worker
                         if(!ConnectionStorage.connections.isEmpty())
                         {
                             Payload payload = PayloadStorage.getNext();
-                            if(payload != null)
+
+                            ArrayList<Connection> connectionsByTopic = ConnectionStorage
+                                    .getConnectionsByTopic(payload.getTopic());
+
+                            if(!connectionsByTopic.isEmpty())
                             {
-                                ArrayList<Connection> connectionsByTopic = ConnectionStorage
-                                        .getConnectionsByTopic(payload.getTopic());
-                                if(!connectionsByTopic.isEmpty())
+                                for (Connection connection : connectionsByTopic)
                                 {
-                                    for (Connection connection : connectionsByTopic)
-                                    {
-                                        System.out.println("Trying to notify subscriber -" + connection.getAddress());
-                                        NotifierGrpc.NotifierBlockingStub stub = NotifierGrpc.newBlockingStub(connection.getChannel());
-                                        NotifyRequest request = NotifyRequest.newBuilder().setContent(payload.getMessage()).build();
-                                        try
-                                        {
-                                            NotifyResponse response = stub.notify(request);
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            System.out.println("Can't send the message! Receiver closed!");
-                                            System.out.println(e);
-                                            ConnectionStorage.remove(connection);
-                                        }
-                                    }
+                                    NotifierGrpc.NotifierBlockingStub stub = NotifierGrpc.newBlockingStub(connection.getChannel());
+                                    NotifyRequest request = NotifyRequest.newBuilder().setContent(payload.getMessage()).build();
                                     try
                                     {
-                                        Thread.sleep(2000);
+                                        NotifyResponse response = stub.notify(request);
                                     }
-                                    catch (InterruptedException e)
+                                    catch (Exception e)
                                     {
-                                        e.printStackTrace();
+                                        System.out.println("Receiver disconented!");
+                                        ConnectionStorage.remove(connection);
                                     }
-                                    PayloadStorage.remove(payload);
+                                }
+                                try
+                                {
+                                    Thread.sleep(500);
+                                }
+                                catch (InterruptedException e)
+                                {
+                                    e.printStackTrace();
                                 }
                             }
                         }
-                    }
-                    try
-                    {
-                        Thread.sleep(500);
-                    }
-                    catch (InterruptedException e)
-                    {
-                        e.printStackTrace();
+                        try
+                        {
+                            Thread.sleep(2000);
+                        }
+                        catch (InterruptedException e)
+                        {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

@@ -18,16 +18,10 @@ public class Connection
     }
     public ManagedChannel getChannel() {return channel;}
 
-    public Connection(String address, String topic)
+    public Connection(String address, String topic, ManagedChannel channel)
     {
         this.address = address;
         this.topic = topic;
-
-        String[] tokens = address.split(":");
-        String ipAdress = tokens[0];
-
-        int port = Integer.parseInt(tokens[1]);
-        channel = ManagedChannelBuilder.forAddress(ipAdress, port)
-                .usePlaintext().build();
+        this.channel = channel;
     }
 }

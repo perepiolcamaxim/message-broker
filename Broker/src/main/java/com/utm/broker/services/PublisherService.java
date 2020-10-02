@@ -15,7 +15,6 @@ public class PublisherService extends PublisherGrpc.PublisherImplBase
         PublishResponse.Builder response = PublishResponse.newBuilder();
         Payload payload = request.getPayload(0);
         PayloadStorage.add(payload);
-        PayloadStorage.print();
 
         response.setIsSuccess(true);
         responseObserver.onNext(response.build());

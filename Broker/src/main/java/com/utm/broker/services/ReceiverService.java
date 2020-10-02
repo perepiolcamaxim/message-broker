@@ -3,11 +3,10 @@ package com.utm.broker.services;
 import com.utm.broker.Connection;
 import com.utm.broker.ConnectionStorage;
 import com.utm.broker.PayloadStorage;
-import com.utm.common.ConnectionInfo;
 import com.utm.common.rcp.publisher.Payload;
 import com.utm.common.rcp.subscriber.*;
-import io.grpc.Grpc;
-import io.grpc.ServerCall;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
 import java.util.ArrayList;
@@ -17,15 +16,19 @@ public class ReceiverService extends SubscriberGrpc.SubscriberImplBase
     @Override
     public void subscribe(SubscribeRequest request, StreamObserver<SubscribeResponse> responseObserver)
     {
+        String[] tokens = request.getAddress().split(":");
+        String ipAdress = tokens[0];
+        int port = Integer.parseInt(tokens[1]);
+        ManagedChannel channel = ManagedChannelBuilder.forAddress(ipAdress, port)
+                .usePlaintext().build();
+
         String[] topics = request.getTopic().split("&");
 
-        for (String topic : topics){
-            Connection connection = new Connection(request.getAddress(), topic);
+        for (String topic : topics)
+        {
+            Connection connection = new Connection(request.getAddress(), topic, channel);
             ConnectionStorage.add(connection); //se salveaza conexiunea in storage
         }
-
-
-        System.out.println("Lista de receiveri:");
 
         ConnectionStorage.print();
 
@@ -39,15 +42,14 @@ public class ReceiverService extends SubscriberGrpc.SubscriberImplBase
     public void getNewsByKeyWord(GetNewsRequest request, StreamObserver<GetNewsResponse> responseObserver)
     {
         String news = "";
-
         int i = 0;
+
         for(Payload payload:PayloadStorage.getPayloads())
         {
             if(payload.getMessage().contains(request.getTopic()))
             {
                 i++;
                 news  = news + i + ". " + payload.getTopic() +" : "  + payload.getMessage() + "\n";
-                System.out.println(news);
             }
         }
 

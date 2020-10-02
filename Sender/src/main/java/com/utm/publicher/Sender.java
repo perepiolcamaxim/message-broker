@@ -34,8 +34,6 @@ public class Sender
 
             PublishRequest request = PublishRequest.newBuilder().addPayload(payload).build();
             PublishResponse response = stub.publishMessage(request);
-
-            System.out.println("Response : " + response.getIsSuccess());
         }
     }
 }

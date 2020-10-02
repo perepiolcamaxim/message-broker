@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ConnectionStorage // se stocheza conexiunile
 {
-    static List<Connection> connections = Collections.synchronizedList(new ArrayList<Connection>());
+    static final List<Connection> connections = Collections.synchronizedList(new ArrayList<Connection>());
 
     public static void add(Connection connectionInfo)
     {
@@ -18,31 +18,37 @@ public class ConnectionStorage // se stocheza conexiunile
 
     public static ArrayList<Connection> getConnectionsByTopic(String topic)
     {
-        ArrayList<Connection> connectionsByTopic = new ArrayList<>();
-        for (Connection connection : connections)
+        synchronized (connections)
         {
-            if(connection.getTopic().equalsIgnoreCase(topic))
+            ArrayList<Connection> connectionsByTopic = new ArrayList<>();
+            for (Connection connection : connections)
             {
-                connectionsByTopic.add(connection);
+                if (connection.getTopic().equalsIgnoreCase(topic))
+                {
+                    connectionsByTopic.add(connection);
+                }
             }
+            return connectionsByTopic;
         }
-        return connectionsByTopic;
     }
 
-    public static boolean remove(Connection connection)
+    public static void remove(Connection connection)
     {
-        synchronized (connection)
+        synchronized (connections)
         {
-            return connections.remove(connection);
+            connections.removeIf(connection1 -> connection.getAddress() == connection1.getAddress());
         }
     }
 
     public static void print()
     {
-        System.out.println("Receivers:");
-        for(Connection connection : connections)
+        synchronized (connections)
         {
-            System.out.println(connection.getAddress() + " " + connection.getTopic());
+            System.out.println("Receivers:");
+            for (Connection connection : connections)
+            {
+                System.out.println(connection.getAddress() + " " + connection.getTopic());
+            }
         }
     }
 }

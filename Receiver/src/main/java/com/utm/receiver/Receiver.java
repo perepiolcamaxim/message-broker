@@ -15,7 +15,6 @@ import java.net.ServerSocket;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-
 public class Receiver
 {
     public static void main(String[] args)
@@ -44,7 +43,6 @@ public class Receiver
 
         SubscriberGrpc.SubscriberBlockingStub stub = SubscriberGrpc.newBlockingStub(channel);
 
-
         System.out.println("1. Find by keyword.");
         System.out.println("2. Subscribe to topic.");
 
@@ -57,6 +55,7 @@ public class Receiver
             GetNewsRequest request = GetNewsRequest.newBuilder().setTopic(topic).build();
             GetNewsResponse response = stub.getNewsByKeyWord(request);
             System.out.println("Response : \n" + response.getMessages());
+            return;
         }
         else{
             System.out.println("Enter the topic:");
