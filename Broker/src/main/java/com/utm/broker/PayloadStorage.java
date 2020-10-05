@@ -10,7 +10,8 @@ public class PayloadStorage
     private static final Queue<Payload> payloads = new ConcurrentLinkedDeque<Payload>();
     private static final Queue<Payload> payloadsForever = new ConcurrentLinkedDeque<Payload>();
 
-    public static void add(Payload payload) {
+    public static void add(Payload payload)
+    {
         payloads.add(payload);
         payloadsForever.add(payload);
     }

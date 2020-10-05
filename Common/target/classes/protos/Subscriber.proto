@@ -7,6 +7,7 @@ service Subscriber
 {
   rpc subscribe(SubscribeRequest) returns (SubscribeResponse);
   rpc getNewsByKeyWord(GetNewsRequest) returns (GetNewsResponse);
+  rpc disconnect(DisconnectRequest) returns (DisconnectResponse);
 }
 
 message SubscribeRequest
@@ -28,4 +29,14 @@ message GetNewsRequest
 message GetNewsResponse
 {
   string messages = 1;
+}
+
+message DisconnectRequest
+{
+  string address = 1;
+}
+
+message DisconnectResponse
+{
+  bool isSuccess = 1;
 }

@@ -9,8 +9,6 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.stub.StreamObserver;
 
-import java.util.ArrayList;
-
 public class ReceiverService extends SubscriberGrpc.SubscriberImplBase
 {
     @Override
@@ -55,6 +53,21 @@ public class ReceiverService extends SubscriberGrpc.SubscriberImplBase
 
         GetNewsResponse.Builder response = GetNewsResponse.newBuilder();
         response.setMessages(news);
+        responseObserver.onNext(response.build());
+        responseObserver.onCompleted();
+    }
+
+    @Override
+    public void disconnect(DisconnectRequest request, StreamObserver<DisconnectResponse> responseObserver)
+    {
+        System.out.println("Receiver gracefully shutdown!");
+        Connection connection = new Connection(request.getAddress(), null, null);
+        ConnectionStorage.removeByAddress(connection);
+
+        // TO DO : somehow disconnect receiver
+
+        DisconnectResponse.Builder response = DisconnectResponse.newBuilder();
+        response.setIsSuccess(true);
         responseObserver.onNext(response.build());
         responseObserver.onCompleted();
     }

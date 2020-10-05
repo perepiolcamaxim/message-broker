@@ -32,11 +32,11 @@ public class ConnectionStorage // se stocheza conexiunile
         }
     }
 
-    public static void remove(Connection connection)
+    public static void removeByAddress(Connection connection)
     {
         synchronized (connections)
         {
-            connections.removeIf(connection1 -> connection.getAddress() == connection1.getAddress());
+            connections.removeIf(connection1 -> connection.getAddress().equals(connection1.getAddress()));
         }
     }
 

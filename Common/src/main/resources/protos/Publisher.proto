@@ -5,12 +5,29 @@ package com.utm.common;
 
 service Publisher
 {
+  rpc setLastWillAndTestament(LWTRequest) returns (LWTResponse);
   rpc publishMessage(PublishRequest) returns (PublishResponse);
+  rpc disconnect(DisconnectRequest) returns (DisconnectResponse);
+}
+
+message LWTRequest
+{
+  repeated Payload payload = 1;
+}
+
+message LWTResponse
+{
+  bool isSuccess = 1;
 }
 
 message PublishRequest
 {
   repeated Payload payload = 1;
+}
+
+message PublishResponse
+{
+  bool isSuccess = 1;
 }
 
 message Payload
@@ -20,7 +37,12 @@ message Payload
   string message = 3;
 }
 
-message PublishResponse
+message DisconnectRequest
+{
+  int32 id = 1;
+}
+
+message DisconnectResponse
 {
   bool isSuccess = 1;
 }

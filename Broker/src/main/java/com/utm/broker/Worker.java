@@ -1,13 +1,9 @@
 package com.utm.broker;
 
-import com.utm.common.ConnectionSetting;
 import com.utm.common.rcp.notifier.NotifierGrpc;
 import com.utm.common.rcp.notifier.NotifyRequest;
 import com.utm.common.rcp.notifier.NotifyResponse;
 import com.utm.common.rcp.publisher.Payload;
-import com.utm.common.rcp.subscriber.SubscribeRequest;
-import com.utm.common.rcp.subscriber.SubscribeResponse;
-import com.utm.common.rcp.subscriber.SubscriberGrpc;
 
 import java.util.ArrayList;
 
@@ -43,7 +39,7 @@ public class Worker
                                     catch (Exception e)
                                     {
                                         System.out.println("Receiver disconented!");
-                                        ConnectionStorage.remove(connection);
+                                        ConnectionStorage.removeByAddress(connection);
                                     }
                                 }
                                 try
