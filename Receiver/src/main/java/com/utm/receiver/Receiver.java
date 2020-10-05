@@ -36,15 +36,13 @@ public class Receiver
             System.out.println("Server didn't start on " + server.getPort());
         }
 
-        int ID = 1;
         String topic;
         ManagedChannel channel = ManagedChannelBuilder.forAddress(ConnectionSetting.IP, ConnectionSetting.PORT)
                 .usePlaintext().build();
 
         SubscriberGrpc.SubscriberBlockingStub stub = SubscriberGrpc.newBlockingStub(channel);
 
-        System.out.println("1. Find by keyword.");
-        System.out.println("2. Subscribe to topic.");
+        System.out.println("1. Find by keyword\n2. Subscribe to topic\n3. Disconnect");
 
         String state = scanner.nextLine();
 
@@ -54,15 +52,24 @@ public class Receiver
             topic = scanner.nextLine();
             GetNewsRequest request = GetNewsRequest.newBuilder().setTopic(topic).build();
             GetNewsResponse response = stub.getNewsByKeyWord(request);
-            System.out.println("Response : \n" + response.getMessages());
             return;
         }
-        else{
+        else if(Integer.parseInt(state) == 2)
+            {
             System.out.println("Enter the topic:");
             topic = scanner.nextLine();
             SubscribeRequest request = SubscribeRequest.newBuilder().setAddress(ConnectionSetting.IP+ ":" + port).setTopic(topic).build();
             SubscribeResponse response = stub.subscribe(request);
-
+        }
+        else if(Integer.parseInt(state) == 3)
+        {
+            DisconnectRequest request = DisconnectRequest.newBuilder().setAddress(ConnectionSetting.IP+ ":" + port).build();
+            DisconnectResponse response = stub.disconnect(request);
+            if(response.getIsSuccess())
+            {
+                server.shutdownNow();
+                return;
+            }
         }
         try
         {
